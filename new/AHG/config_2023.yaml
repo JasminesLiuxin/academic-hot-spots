@@ -1,0 +1,47 @@
+# general
+gpu_id: 0
+use_gpu: True
+seed: 20211202
+state: INFO
+dataset: mydataset
+num_samples: 1
+reproducibility: True
+mode: test
+
+# dataset
+data_dir: 'my_hot'
+node_vocab: 'my_hot/node_vocab_2023.pkl'
+relation_vocab: 'my_hot/relation_vocab_2023.pkl'
+node_embedding: 'my_hot/nodes_embeddings_2023.npy'
+
+# model
+teacher_dir: 'facebook/bart-base'
+plm_dir: 'facebook/bart-base'   #这个是他解码层的模型，我们的模型得自己写
+log_dir: 'logging'
+
+# training settings
+start_epoch: 0
+epochs: 500
+train_batch_size: 1
+plm_learner: adam
+plm_lr: 0.0001
+external_learner: adam
+external_lr: 0.0001
+rec_weight: 1.0
+kd_weight: 1.0
+cp_weight: 0.5
+gnn_layers: 2
+embedding_size: 768
+hidden_size: 768
+
+# evaluation settings
+eval_batch_size: 1
+
+# testing settings
+external_model: './ckpt-2023/mydataset-1-131-2023/2023-external.bin'
+fine_tuned_plm_dir: './ckpt-2023/mydataset-1-131-2023'
+test_batch_size: 1
+max_seq_length: 100
+output_dir: './ckpt-2023/mydataset-1-131-2023'
+
+
